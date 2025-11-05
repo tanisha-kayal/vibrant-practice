@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MindMate – AI Study Companion</title>
+  <title>MindMate – Your AI Study Companion</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,26 +13,20 @@
   </header>
 
   <main>
-    <section class="input-section">
-      <h2>Log Your Study Session</h2>
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-message ai">
+        👋 Hey there! I’m <b>MindMate</b>. Log your study sessions and I’ll keep you focused!
+      </div>
+    </div>
+
+    <div class="input-box">
       <input
         type="text"
         id="activityInput"
-        placeholder="e.g., Studied Physics for 2 hours"
+        placeholder="Type your activity or question here..."
       />
-      <button id="submitBtn">Log Activity</button>
-    </section>
-
-    <section class="suggestion-section">
-      <h2>MindMate’s AI Suggestion</h2>
-      <p id="aiSuggestion">Enter an activity to receive your focus tip!</p>
-      <button id="aiBtn">Get AI Suggestion</button>
-    </section>
-
-    <section class="log-section">
-      <h2>Today's Activity Log</h2>
-      <ul id="activityList"></ul>
-    </section>
+      <button id="sendBtn">Send</button>
+    </div>
   </main>
 
   <footer>
