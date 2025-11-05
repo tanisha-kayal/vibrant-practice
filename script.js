@@ -1,74 +1,55 @@
-// 🌟 MindMate AI Chat Functionality
+// Shared logic for MindMate pages
 
-const chatContainer = document.getElementById("chatContainer");
-const inputField = document.getElementById("activityInput");
-const sendBtn = document.getElementById("sendBtn");
+// 🔑 INSERT YOUR GEMINI API KEY HERE
+const GEMINI_API_KEY = "AIzaSyCOynUHvqRFsYThuiBrWFrZmdh3L8XQXQw";
 
-const aiResponses = [
-  "Great job logging that! Stay consistent 💪",
-  "Focus for 45 minutes, then take a 10-minute break 🧘‍♀️",
-  "Hydrate and stretch! Your brain loves oxygen 💧",
-  "You’re doing amazing — slow progress is still progress 🌱",
-  "Time-block your next session and stay distraction-free 🔒",
-  "Reflect on your goals today. What’s one thing you can improve? 💭",
-  "Remember to rest — burnout helps no one 🌙",
-  "MindMate is proud of you 😌 Keep going!"
-];
+// --- Local Storage helpers ---
+function getData(){return JSON.parse(localStorage.getItem("mindmate_data"))||{sessions:0,focus:0,streak:0};}
+function saveData(data){localStorage.setItem("mindmate_data",JSON.stringify(data));}
 
-// 🧠 Typing animation
-function typeMessage(element, text, speed = 25) {
-  let i = 0;
-  const typing = setInterval(() => {
-    element.textContent += text.charAt(i);
-    i++;
-    if (i >= text.length) clearInterval(typing);
-  }, speed);
+// --- Dashboard ---
+if(document.getElementById("focusScore")){
+  const d=getData();
+  document.getElementById("focusScore").textContent=d.focus;
+  document.getElementById("sessionsLogged").textContent=d.sessions;
+  document.getElementById("streakDays").textContent=d.streak;
 }
 
-// 🗨️ Add message bubble
-function addMessage(text, sender = "user") {
-  const message = document.createElement("div");
-  message.classList.add("chat-message", sender);
-  chatContainer.appendChild(message);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-  if (sender === "ai") {
-    typeMessage(message, text);
-  } else {
-    message.textContent = text;
+// --- Study Timer ---
+if(document.getElementById("startTimer")){
+  const display=document.getElementById("timerDisplay");
+  const focus=document.getElementById("focusTime");
+  const msg=document.getElementById("sessionMsg");
+  document.getElementById("startTimer").onclick=()=>{
+    let time=focus.value*60;msg.textContent="Focusing...";
+    const t=setInterval(()=>{
+      const m=Math.floor(time/60),s=time%60;
+      display.textContent=`${m}:${s<10?"0":""}${s}`;
+      if(time--<=0){clearInterval(t);msg.textContent="Session done! +10 Focus";const d=getData();d.sessions++;d.focus+=10;saveData(d);}
+    },1000);
+  };
+}
+
+// --- Analytics ---
+if(document.getElementById("barChart")){
+  const ctx=document.getElementById("barChart");
+  const d=getData();
+  new Chart(ctx,{type:"bar",data:{labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+  datasets:[{label:"Minutes Focused",data:[d.focus/7+5,8,10,7,12,6,9],backgroundColor:"#A7C7E7"}]},options:{scales:{y:{beginAtZero:true}}}});
+}
+
+// --- AI Assistant (placeholder) ---
+if(document.getElementById("chatBox")){
+  const chatBox=document.getElementById("chatBox"),input=document.getElementById("userInput"),btn=document.getElementById("sendBtn");
+  function addMsg(txt,cls){const p=document.createElement("p");p.className=cls;p.textContent=txt;chatBox.appendChild(p);chatBox.scrollTop=chatBox.scrollHeight;}
+  async function getGeminiReply(prompt){
+    // ⚠️ Placeholder – replace with real Gemini fetch call using your API key from Google AI Studio docs
+    return `💪 MindMate: "${prompt}" sounds great! Stay consistent and proud of your effort!`;
   }
+  btn.onclick=async()=>{
+    const q=input.value.trim();if(!q)return;
+    addMsg("You: "+q,"user");input.value="";
+    const r=await getGeminiReply(q);
+    setTimeout(()=>addMsg(r,"ai"),500);
+  };
 }
-
-// 💬 Handle send button click
-sendBtn.addEventListener("click", handleChat);
-inputField.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") handleChat();
-});
-
-function handleChat() {
-  const userText = inputField.value.trim();
-  if (userText === "") return;
-
-  // Add user message
-  addMessage(userText, "user");
-  inputField.value = "";
-
-  // Save activity in local storage
-  const saved = JSON.parse(localStorage.getItem("mindmate_log")) || [];
-  saved.push(userText);
-  localStorage.setItem("mindmate_log", JSON.stringify(saved));
-
-  // AI thinking delay
-  setTimeout(() => {
-    const randomReply = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-    addMessage(randomReply, "ai");
-  }, 700);
-}
-
-// 🧾 On page load, reload previous chat
-window.addEventListener("load", () => {
-  const saved = JSON.parse(localStorage.getItem("mindmate_log")) || [];
-  if (saved.length > 0) {
-    addMessage("Welcome back! Here are your last few logs 🗓️", "ai");
-    saved.slice(-3).forEach((text) => addMessage(text, "user"));
-  }
-});

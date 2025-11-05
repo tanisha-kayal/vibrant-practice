@@ -3,36 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MindMate – Your AI Study Companion</title>
+  <title>MindMate Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
+  <nav>
     <h1>🧠 MindMate</h1>
-    <p>Your AI-powered study companion</p>
-  </header>
+    <ul>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="study.html">Study Timer</a></li>
+      <li><a href="analytics.html">Analytics</a></li>
+      <li><a href="ai.html">AI Assistant</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <div class="chat-container" id="chatContainer">
-      <div class="chat-message ai">
-        👋 Hey there! I’m <b>MindMate</b>. Log your study sessions and I’ll keep you focused!
-      </div>
-    </div>
-
-    <div class="input-box">
-      <input
-        type="text"
-        id="activityInput"
-        placeholder="Type your activity or question here..."
-      />
-      <button id="sendBtn">Send</button>
+  <main class="dashboard">
+    <h2>Welcome back!</h2>
+    <p>Your productivity summary:</p>
+    <div class="stats">
+      <div><h3 id="focusScore">0</h3><p>Focus Score</p></div>
+      <div><h3 id="sessionsLogged">0</h3><p>Study Sessions</p></div>
+      <div><h3 id="streakDays">0</h3><p>Day Streak</p></div>
     </div>
   </main>
 
-  <footer>
-    <p>© 2025 Team VERTEX | Built for VIBRANT, Academy of Technology</p>
-  </footer>
-
+  <footer>© 2025 MindMate – Team VERTEX</footer>
   <script src="script.js"></script>
 </body>
 </html>
