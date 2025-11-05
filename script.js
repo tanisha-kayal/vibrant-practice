@@ -1,4 +1,5 @@
-// Array of random motivational / focus tips
+// 🌟 MindMate – AI Companion Script
+
 const aiTips = [
   "Great job! 💪 Take a 10-minute break to refresh your mind.",
   "Focus is a muscle — you just trained it! Try a short walk 🚶‍♀️.",
@@ -16,13 +17,39 @@ const aiBtn = document.getElementById("aiBtn");
 const aiSuggestion = document.getElementById("aiSuggestion");
 const activityList = document.getElementById("activityList");
 
-const activities = [];
+let activities = JSON.parse(localStorage.getItem("activities")) || [];
 
-// Log user activity
+// 🧾 Renders the activity list dynamically
+function renderActivities() {
+  activityList.innerHTML = "";
+  if (activities.length === 0) {
+    activityList.innerHTML = `<li>No activities logged yet 😴</li>`;
+    return;
+  }
+  activities.forEach((act, i) => {
+    const li = document.createElement("li");
+    li.textContent = `${i + 1}. ${act}`;
+    activityList.appendChild(li);
+  });
+}
+
+// ✨ Typing animation for AI suggestion
+function typeEffect(text) {
+  aiSuggestion.textContent = "";
+  let i = 0;
+  const typing = setInterval(() => {
+    aiSuggestion.textContent += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(typing);
+  }, 30);
+}
+
+// 🧠 Event: Add Activity
 submitBtn.addEventListener("click", () => {
   const activity = activityInput.value.trim();
   if (activity) {
     activities.push(activity);
+    localStorage.setItem("activities", JSON.stringify(activities));
     renderActivities();
     activityInput.value = "";
   } else {
@@ -30,18 +57,11 @@ submitBtn.addEventListener("click", () => {
   }
 });
 
-// Show random AI suggestion
+// 🤖 Event: Get AI Suggestion
 aiBtn.addEventListener("click", () => {
   const randomTip = aiTips[Math.floor(Math.random() * aiTips.length)];
-  aiSuggestion.textContent = randomTip;
+  typeEffect(randomTip);
 });
 
-// Render activity list
-function renderActivities() {
-  activityList.innerHTML = "";
-  activities.forEach((act, i) => {
-    const li = document.createElement("li");
-    li.textContent = `${i + 1}. ${act}`;
-    activityList.appendChild(li);
-  });
-}
+// 🧹 On Page Load
+renderActivities();
