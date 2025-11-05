@@ -97,46 +97,46 @@ if (document.getElementById("chatBox")) {
     const msg = prompt.toLowerCase();
 
     if (msg.includes("tired") || msg.includes("sleep")) {
-      return "MindMate: Sounds like your brain’s asking for a power nap. Take 10 minutes off, hydrate, and come back strong.";
+      return "Sounds like your brain’s asking for a power nap. Take 10 minutes off, hydrate, and come back strong.";
     }
     if (msg.includes("lazy") || msg.includes("procrastinate")) {
-      return "MindMate: Let’s break the lazy streak. Start with 5 minutes of focused work — momentum beats motivation!";
+      return "Let’s break the lazy streak. Start with 5 minutes of focused work — momentum beats motivation!";
     }
     if (msg.includes("focus") || msg.includes("concentrate")) {
-      return "MindMate: Try the Pomodoro trick — 25 minutes focus, 5 minutes break. Focus grows with consistency.";
+      return "Try the Pomodoro trick — 25 minutes focus, 5 minutes break. Focus grows with consistency.";
     }
     if (msg.includes("stressed") || msg.includes("anxious")) {
-      return "MindMate: Deep breath. You’ve handled worse. Let’s slow down and tackle one thing at a time.";
+      return "Deep breath. You’ve handled worse. Let’s slow down and tackle one thing at a time.";
     }
     if (msg.includes("study") || msg.includes("exam") || msg.includes("subject")) {
       const tips = [
-        "MindMate: Study smart — revise old notes before learning new topics.",
-        "MindMate: Teaching what you learn helps you retain 90% more. Try explaining a topic out loud.",
-        "MindMate: Break your study into chunks — your brain loves structure more than stress.",
+        "Study smart — revise old notes before learning new topics.",
+        "Teaching what you learn helps you retain 90% more. Try explaining a topic out loud.",
+        "Break your study into chunks — your brain loves structure more than stress.",
       ];
       return tips[Math.floor(Math.random() * tips.length)];
     }
     if (msg.includes("motivate") || msg.includes("quote") || msg.includes("inspire")) {
       const quotes = [
-        "MindMate: 'Discipline will take you places motivation can’t.'",
-        "MindMate: 'Start where you are. Use what you have. Do what you can.'",
-        "MindMate: 'You don’t need to see the whole staircase — just take the first step.'",
+        "Discipline will take you places motivation can’t.",
+        "Start where you are. Use what you have. Do what you can.",
+        "You don’t need to see the whole staircase — just take the first step.",
       ];
       return quotes[Math.floor(Math.random() * quotes.length)];
     }
     if (msg.includes("sad") || msg.includes("bad") || msg.includes("down")) {
       const comforting = [
-        "MindMate: Bad days happen. But they pass. You’re doing better than you think.",
-        "MindMate: Rest, reset, and rise again — even flowers take time to bloom.",
+        "Bad days happen. But they pass. You’re doing better than you think.",
+        "Rest, reset, and rise again — even flowers take time to bloom.",
       ];
       return comforting[Math.floor(Math.random() * comforting.length)];
     }
 
     // Default fallback
     const random = [
-      "MindMate: You’ve got this. Small steps every day lead to big wins.",
-      "MindMate: Keep showing up — consistency beats perfection every single time.",
-      "MindMate: Every minute improving yourself compounds over time. Stay steady.",
+      "You’ve got this. Small steps every day lead to big wins.",
+      "Keep showing up — consistency beats perfection every single time.",
+      "Every minute improving yourself compounds over time. Stay steady.",
     ];
     return random[Math.floor(Math.random() * random.length)];
   }
