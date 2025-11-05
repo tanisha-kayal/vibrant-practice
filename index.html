@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibrant Practice</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindMate – AI Study Companion</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Hello, World! 🌍</h1>
-  <p>Your website is now officially live on GitHub Pages!</p>
+  <header>
+    <h1>🧠 MindMate</h1>
+    <p>Your AI-powered study companion</p>
+  </header>
+
+  <main>
+    <section class="input-section">
+      <h2>Log Your Study Session</h2>
+      <input
+        type="text"
+        id="activityInput"
+        placeholder="e.g., Studied Physics for 2 hours"
+      />
+      <button id="submitBtn">Log Activity</button>
+    </section>
+
+    <section class="suggestion-section">
+      <h2>MindMate’s AI Suggestion</h2>
+      <p id="aiSuggestion">Enter an activity to receive your focus tip!</p>
+      <button id="aiBtn">Get AI Suggestion</button>
+    </section>
+
+    <section class="log-section">
+      <h2>Today's Activity Log</h2>
+      <ul id="activityList"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Team VERTEX | Built for VIBRANT, Academy of Technology</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
