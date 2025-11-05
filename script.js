@@ -43,8 +43,30 @@ if(document.getElementById("chatBox")){
   const chatBox=document.getElementById("chatBox"),input=document.getElementById("userInput"),btn=document.getElementById("sendBtn");
   function addMsg(txt,cls){const p=document.createElement("p");p.className=cls;p.textContent=txt;chatBox.appendChild(p);chatBox.scrollTop=chatBox.scrollHeight;}
   async function getGeminiReply(prompt){
-    // ⚠️ Placeholder – replace with real Gemini fetch call using your API key from Google AI Studio docs
-    return `💪 MindMate: "${prompt}" sounds great! Stay consistent and proud of your effort!`;
+    async function getGeminiReply(prompt) {
+  const endpoint =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" +
+    GEMINI_API_KEY;
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+    }),
+  });
+
+  const data = await response.json();
+
+  // Extract the model's reply text
+  const reply =
+    data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+    "⚠️ MindMate couldn’t think of a response right now. Try again!";
+
+  return reply;
+  }
   }
   btn.onclick=async()=>{
     const q=input.value.trim();if(!q)return;
