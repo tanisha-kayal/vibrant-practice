@@ -13,3 +13,19 @@ input,button{padding:0.8rem;border-radius:8px;border:none;}
 button{background:#A7C7E7;cursor:pointer;font-weight:600;}
 button:hover{background:#89b4de;}
 footer{text-align:center;padding:1rem;color:#666;}
+.user {
+  text-align: right;
+  background: #dbeafe;
+  padding: 8px 12px;
+  border-radius: 10px 10px 0 10px;
+  margin: 5px;
+  display: inline-block;
+}
+.ai {
+  text-align: left;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 10px 10px 10px 0;
+  margin: 5px;
+  display: inline-block;
+}
